@@ -1,0 +1,22 @@
+GET http://127.0.0.1:5000/movies HTTP/1.1
+GET http://127.0.0.1:5000/movies/60536237ccfe7b1830d16c06 HTTP/1.1
+DELETE http://127.0.0.1:5000/movies/60536237ccfe7b1830d16c06 HTTP/1.1
+POST http://127.0.0.1:5000/movies HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "New Movie",
+  "genre": "Sci-fi",
+  "year": 2021
+}
+
+PUT http://127.0.0.1:5000/movies HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": "60536237ccfe7b1830d16c06",
+  "title": "Updated Movie",
+  "genre": "Horror",
+  "year": 2020
+}
+
