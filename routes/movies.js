@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
   try {
     const movies = await Movies.find();
     console.log(movies);
-    res.json(movies);
+    return res.json(movies);
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       statusCode: res.statusCode,
       statusMessage: res.statusMessage,
       message: err,
@@ -99,9 +99,9 @@ router.post('/', async (req, res) => {
     });
     const movie = await newMovie.save();
     console.log(movie);
-    res.json(movie);
+    return res.json(movie);
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       statusCode: res.statusCode,
       statusMessage: res.statusMessage,
       message: err,

@@ -6,6 +6,7 @@
     "name": "Iordanidis Chris"
   },
   "description": "MERN app demo.",
+  "proxy": "http://127.0.0.1:5000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
