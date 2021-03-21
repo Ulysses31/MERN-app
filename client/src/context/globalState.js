@@ -10,7 +10,8 @@ const initialState = {
     genre: '',
     year: '',
     createdAt: ''
-  }
+  },
+  error: ''
 };
 
 export const GlobalContext = createContext(initialState);
@@ -36,7 +37,13 @@ export default function GlobalContextProvider({
           payload: payload
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: 'ERROR',
+          payload: err
+        });
+      });
   };
 
   const addMovie = (movie) => {

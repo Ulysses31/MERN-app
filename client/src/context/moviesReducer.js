@@ -1,5 +1,10 @@
 export default function MoviesReducer(state, action) {
   switch (action.type) {
+    case 'ERROR':
+      return {
+        ...state,
+        error: action.payload
+      };
     case 'SELECTED_MOVIE':
       return {
         ...state,

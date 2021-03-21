@@ -6,7 +6,7 @@
     "name": "Iordanidis Chris"
   },
   "description": "MERN app demo.",
-  "proxy": "https://fathomless-waters-33241.herokuapp.com",
+  "proxy": "http://localhost",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

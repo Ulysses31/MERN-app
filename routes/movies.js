@@ -5,18 +5,24 @@ const Movies = require('../models/movies');
  * @name Movies
  * @description Get movies list
  */
-router.get('/', async (req, res) => {
-  try {
-    const movies = await Movies.find();
-    console.log(movies);
-    return res.json(movies);
-  } catch (err) {
-    return res.status(500).json({
-      statusCode: res.statusCode,
-      statusMessage: res.statusMessage,
-      message: err,
+router.get('/', (req, res) => {
+  Movies.find()
+    .then((movies) => res.json(movies))
+    .catch((err) => {
+      console.log(err);
+      res.json(err);
     });
-  }
+  //  try {
+  //    const movies = await Movies.find();
+  //    console.log(movies);
+  //    return res.json(movies);
+  //  } catch (err) {
+  //    return res.status(500).json({
+  //      statusCode: res.statusCode,
+  //      statusMessage: res.statusMessage,
+  //      message: err,
+  //    });
+  //  }
 });
 
 /**
