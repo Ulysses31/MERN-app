@@ -1,4 +1,4 @@
-// const path = require('path');
+const path = require('path');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const express = require('express');
@@ -23,7 +23,7 @@ mongoose.connect(process.env.DB_CONNECT, {
   useUnifiedTopology: true,
   keepAlive: 1,
   connectTimeoutMS: 30000,
-  dbName: process.env.DB_NAME
+  dbName: process.env.DB_NAME,
 });
 
 // db events
@@ -58,7 +58,7 @@ app.use((req, res, next) => {
       remote: req._remoteAddress,
       url: req.url,
       method: req.method,
-      body: req.body
+      body: req.body,
     })
   );
   // logger.info(
@@ -77,7 +77,7 @@ app.use((req, res, next) => {
         statusCode: res.statusCode,
         statusMessage: res.statusMessage,
         headers: res._header,
-        body: res.send
+        body: res.send,
       })
     );
     // logger.info(
@@ -94,3 +94,18 @@ app.use((req, res, next) => {
 
 // API routes
 app.use('/movies', moviesRoute);
+
+// production script needed
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(
+      path.resolve(
+        __dirname,
+        'client',
+        'build',
+        'index.html'
+      )
+    );
+  });
+}

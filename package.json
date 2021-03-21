@@ -9,7 +9,8 @@
   "scripts": {
     "start": "set DEBUG=http,express:* & nodemon --inspect server.js",
     "lint": "eslint ./*.js ./models/*.js ./routes/*.js --ext .js --config .eslintrc.json",
-    "lintfix": "eslint ./*.js ./models/*.js ./routes/*.js --ext .js --config .eslintrc.json --fix"
+    "lintfix": "eslint ./*.js ./models/*.js ./routes/*.js --ext .js --config .eslintrc.json --fix",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client"
   },
   "dependencies": {
     "cors": "^2.8.5",
