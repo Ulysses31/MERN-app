@@ -1,26 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { GlobalContext } from '../../context/globalState';
 import './movies.css';
 
 function MoviesList() {
-  const [movies, setMovies] = useState([]);
-
-  function test() {
-    fetch('/movies')
-      .then((data) => {
-        if (data.ok) {
-          return data.json();
-        }
-      })
-      .then((payload) => {
-        setMovies(payload);
-      })
-      .catch((err) => console.log(err));
-  }
+  const {
+    movies,
+    getMovies,
+    deleteMovie,
+    setSelectedMovie
+  } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log('called...');
-    test();
+    getMovies();
   }, []);
+
+  function removeMovie(id) {
+    if (id) {
+      fetch(`/movies/${id}`, {
+        method: 'DELETE'
+      })
+        .then((resp) => {
+          return resp.json();
+        })
+        .then((payload) => {
+          if (payload.deletedCount === 1) {
+            deleteMovie(id);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  function editMovie(movie) {
+    // console.log(movie);
+    setSelectedMovie(movie);
+  }
 
   return (
     <div>
@@ -30,6 +44,14 @@ function MoviesList() {
           return (
             <div key={movie._id}>
               <h2>{movie.title}</h2>
+              <button
+                onClick={() => removeMovie(movie._id)}
+              >
+                Delete
+              </button>
+              <button onClick={() => editMovie(movie)}>
+                Edit
+              </button>
               <p>Genre: {movie.genre}</p>
               <p>Year: {movie.year}</p>
             </div>

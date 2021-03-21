@@ -2,14 +2,17 @@ import React from 'react';
 import './App.css';
 import MovieForm from './components/movies/movieForm';
 import MoviesList from './components/movies/moviesList';
+import GlobalContextProvider from './context/globalState';
 
 function App() {
   return (
-    <div className='App'>
-      <MovieForm />
-      <hr />
-      <MoviesList />
-    </div>
+    <GlobalContextProvider>
+      <div className='App'>
+        <MovieForm />
+        <hr />
+        <MoviesList />
+      </div>
+    </GlobalContextProvider>
   );
 }
 

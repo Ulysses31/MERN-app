@@ -66,7 +66,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/', async (req, res) => {
   try {
     const movie = await Movies.updateOne(
-      { _id: req.body.id },
+      { _id: req.body._id },
       {
         $set: {
           title: req.body.title,

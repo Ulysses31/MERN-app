@@ -1,14 +1,16 @@
 {
   "name": "my-mern-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "MERN nodeJs API server.",
+  "keywords": [],
+  "author": "Iordanidis Chris",
+  "license": "ISC",
   "main": "server.js",
   "scripts": {
-    "start": "set DEBUG=http,express:* & nodemon --inspect server.js"
+    "start": "set DEBUG=http,express:* & nodemon --inspect server.js",
+    "lint": "eslint ./*.js ./models/*.js ./routes/*.js --ext .js --config .eslintrc.json",
+    "lintfix": "eslint ./*.js ./models/*.js ./routes/*.js --ext .js --config .eslintrc.json --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -18,5 +20,14 @@
     "nodemon": "^2.0.7",
     "winston": "^3.3.3",
     "winston-mongodb": "^5.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }

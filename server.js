@@ -1,10 +1,10 @@
-const express = require('express');
-const app = express();
+// const path = require('path');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const morgan = require('morgan');
-const path = require('path');
+const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 const moviesRoute = require('./routes/movies');
 
 // config
@@ -17,13 +17,13 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
 
-//mongoose
+// mongoose
 mongoose.connect(process.env.DB_CONNECT, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   keepAlive: 1,
   connectTimeoutMS: 30000,
-  dbName: process.env.DB_NAME,
+  dbName: process.env.DB_NAME
 });
 
 // db events
@@ -58,7 +58,7 @@ app.use((req, res, next) => {
       remote: req._remoteAddress,
       url: req.url,
       method: req.method,
-      body: req.body,
+      body: req.body
     })
   );
   // logger.info(
@@ -77,7 +77,7 @@ app.use((req, res, next) => {
         statusCode: res.statusCode,
         statusMessage: res.statusMessage,
         headers: res._header,
-        body: res.send,
+        body: res.send
       })
     );
     // logger.info(
@@ -92,5 +92,5 @@ app.use((req, res, next) => {
   next();
 });
 
-//API routes
+// API routes
 app.use('/movies', moviesRoute);
