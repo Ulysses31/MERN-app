@@ -17,36 +17,40 @@ app.use(cors());
 app.use(morgan('combined'));
 
 // mongoose
-mongoose.connect(process.env.DB_CONNECT, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  keepAlive: 1,
-  connectTimeoutMS: 30000,
-  dbName: process.env.DB_NAME,
-});
+mongoose.connect(
+  process.env.DB_CONNECT,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    keepAlive: 1,
+    connectTimeoutMS: 30000,
+    dbName: process.env.DB_NAME,
+  },
+  () => console.log(`Connected to database.`)
+);
 
 // db events
-mongoose.connection.on('connected', () => {
-  console.log(`Connected to database.`);
-  // logger.info(`Connected to database.`);
+// mongoose.connection.on('connected', () => {
+//   console.log(`Connected to database.`);
+//   // logger.info(`Connected to database.`);
+//
+//   app.listen(PORT, () => {
+//     console.log(
+//       `Server started at http://localhost:${PORT}...`
+//     );
+//   });
+// });
 
-  app.listen(PORT, () => {
-    console.log(
-      `Server started at http://localhost:${PORT}...`
-    );
-  });
-});
+// mongoose.connection.on('reconnected', () => {
+//   console.log(`Reconnected to database.`);
+//   // logger.info(`Reconnected to database.`);
+// });
 
-mongoose.connection.on('reconnected', () => {
-  console.log(`Reconnected to database.`);
-  // logger.info(`Reconnected to database.`);
-});
-
-mongoose.connection.on('error', (err) => {
-  console.log(`Database connection error: ${err.message}.`);
-  // mailer(`Database connection error: ${err.message}`);
-  // logger.error(`Database connection error: ${err.message}`);
-});
+// mongoose.connection.on('error', (err) => {
+//   console.log(`Database connection error: ${err.message}.`);
+//   // mailer(`Database connection error: ${err.message}`);
+//   // logger.error(`Database connection error: ${err.message}`);
+// });
 
 // log every request - response
 app.use((req, res, next) => {
@@ -108,3 +112,9 @@ if (process.env.NODE_ENV === 'production') {
     );
   });
 }
+
+app.listen(PORT, () => {
+  console.log(
+    `Server started at http://localhost:${PORT}...`
+  );
+});
