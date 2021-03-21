@@ -9,7 +9,6 @@ const moviesRoute = require('./routes/movies');
 
 // config
 dotenv.config();
-const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || '5000';
 
 app.use(express.urlencoded({ extended: true }));
@@ -31,9 +30,9 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to database.`);
   // logger.info(`Connected to database.`);
 
-  app.listen(PORT, HOST, () => {
+  app.listen(PORT, () => {
     console.log(
-      `Server started at http://${HOST}:${PORT}...`
+      `Server started at http://localhost:${PORT}...`
     );
   });
 });
