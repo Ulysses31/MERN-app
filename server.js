@@ -23,8 +23,8 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
     keepAlive: 1,
-    connectTimeoutMS: 30000,
-    dbName: process.env.DB_NAME,
+    connectTimeoutMS: 60000,
+    dbName: process.env.DB_NAME
   },
   () => console.log(`Connected to database.`)
 );
@@ -53,47 +53,47 @@ mongoose.connect(
 // });
 
 // log every request - response
-app.use((req, res, next) => {
-  // request
-  console.log(
-    JSON.stringify({
-      headers: req.headers,
-      remote: req._remoteAddress,
-      url: req.url,
-      method: req.method,
-      body: req.body,
-    })
-  );
-  // logger.info(
-  // 	JSON.stringify({
-  // 		headers: req.headers,
-  // 		remote: req._remoteAddress,
-  // 		url: req.url,
-  // 		method: req.method,
-  // 		body: req.body
-  // 	})
-  // );
-  // response
-  res.on('finish', () => {
-    console.log(
-      JSON.stringify({
-        statusCode: res.statusCode,
-        statusMessage: res.statusMessage,
-        headers: res._header,
-        body: res.send,
-      })
-    );
-    // logger.info(
-    // 	JSON.stringify({
-    // 		statusCode: res.statusCode,
-    // 		statusMessage: res.statusMessage,
-    // 		headers: res._header,
-    // 		body: res.send
-    // 	})
-    // );
-  });
-  next();
-});
+// app.use((req, res, next) => {
+// request
+// console.log(
+//   JSON.stringify({
+//     headers: req.headers,
+//     remote: req._remoteAddress,
+//     url: req.url,
+//     method: req.method,
+//     body: req.body
+//   })
+// );
+// logger.info(
+// 	JSON.stringify({
+// 		headers: req.headers,
+// 		remote: req._remoteAddress,
+// 		url: req.url,
+// 		method: req.method,
+// 		body: req.body
+// 	})
+// );
+// response
+// res.on('finish', () => {
+//   console.log(
+//     JSON.stringify({
+//       statusCode: res.statusCode,
+//       statusMessage: res.statusMessage,
+//       headers: res._header,
+//       body: res.send
+//     })
+//   );
+//   // logger.info(
+//   // 	JSON.stringify({
+//   // 		statusCode: res.statusCode,
+//   // 		statusMessage: res.statusMessage,
+//   // 		headers: res._header,
+//   // 		body: res.send
+//   // 	})
+//   // );
+// });
+// next();
+// });
 
 // API routes
 app.use('/movies', moviesRoute);
@@ -118,3 +118,5 @@ app.listen(PORT, () => {
     `Server started at http://localhost:${PORT}...`
   );
 });
+
+module.exports = app;

@@ -8,13 +8,13 @@ const Movies = require('../models/movies');
 router.get('/', async (req, res) => {
   try {
     const movies = await Movies.find();
-    console.log(movies);
+    // console.log(movies);
     return res.json(movies);
   } catch (err) {
     return res.status(500).json({
       statusCode: res.statusCode,
       statusMessage: res.statusMessage,
-      message: err,
+      message: err
     });
   }
 });
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const movie = await Movies.findById({
-      _id: req.params.id,
+      _id: req.params.id
     });
     console.log(movie);
     res.json(movie);
@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({
       statusCode: res.statusCode,
       statusMessage: res.statusMessage,
-      message: err,
+      message: err
     });
   }
 });
@@ -46,15 +46,15 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const movie = await Movies.deleteOne({
-      _id: req.params.id,
+      _id: req.params.id
     });
-    console.log(movie);
+    // console.log(movie);
     res.json(movie);
   } catch (err) {
     res.status(500).json({
       statusCode: res.statusCode,
       statusMessage: res.statusMessage,
-      message: err,
+      message: err
     });
   }
 });
@@ -71,17 +71,17 @@ router.put('/', async (req, res) => {
         $set: {
           title: req.body.title,
           genre: req.body.genre,
-          year: req.body.year,
-        },
+          year: req.body.year
+        }
       }
     );
-    console.log(movie);
+    // console.log(movie);
     res.json(movie);
   } catch (err) {
     res.status(500).json({
       statusCode: res.statusCode,
       statusMessage: res.statusMessage,
-      message: err,
+      message: err
     });
   }
 });
@@ -95,16 +95,16 @@ router.post('/', async (req, res) => {
     const newMovie = new Movies({
       title: req.body.title,
       genre: req.body.genre,
-      year: req.body.year,
+      year: req.body.year
     });
     const movie = await newMovie.save();
-    console.log(movie);
+    // console.log(movie);
     return res.json(movie);
   } catch (err) {
     return res.status(500).json({
       statusCode: res.statusCode,
       statusMessage: res.statusMessage,
-      message: err,
+      message: err
     });
   }
 });
